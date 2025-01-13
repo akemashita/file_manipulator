@@ -38,7 +38,9 @@ python3 file_manipulator.py duplicate-contents <input_filepath> <repeat_integer>
 ```
 python3 file_manipulator.py replace-string <input_filepath> <find_string> <replace_string>
 ```
-検索文字列（`find_string`）と置換文字列（`replace_string`）の両方を必ず指定してください。
+- 検索文字列（`find_string`）と置換文字列（`replace_string`）の両方を必ず指定してください。
+- 空白を含む文字列は、次のように指定してください：`'find1 find2'`
+- 置換文字列（`replace_string`）を `''` ように指定すると、ファイルの内容からすべての検索文字列を削除することができます。
 
 ## 注意事項
 - 指定した出力ファイルパス（`output_filepath`） が無効またはアクセス不可の場合、`output.txt` という名前で同じディレクトリに保存されます。
