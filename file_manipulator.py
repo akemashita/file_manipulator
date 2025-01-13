@@ -1,10 +1,13 @@
 import sys
 
 def main():
-    # 引数に過不足がある場合は処理を終了する
-    if len(sys.argv) != 4:
-        print('Invalid input, just 4 arguments are required. Please refer to the following statement.')
-        print('file_manipulator.py COMMAND INPUT_FILEPATH OUTPUT_FILEPATH')
+    # 引数に不足がある場合は処理を終了する
+    if len(sys.argv) < 4:
+        print('Invalid input, 4 or 5 arguments are required. See below example.')
+        print('[reverse] file_manipulator.py reverse input_filepath output_filepath')
+        print('[copy] file_manipulator.py copy input_filepath output_filepath')
+        print('[duplicate-contents] file_manipulator.py duplicate-contents input_filepath repeat_integer')
+        print('[replace-string command] file_manipulator.py replace-string input_filepath find_string replace_string')
         sys.exit(1)
 
     script_name = sys.argv[0]
@@ -33,7 +36,16 @@ def main():
                 duplicate_contents(input_data, output_filepath, input_filepath)
 
             elif command == 'replace-string':
-                print('replace-string command was selected')
+                # print('replace-string command was selected')
+
+                if len(sys.argv) < 5:
+                    print('Invalid input, replace-string command require 5 arguments. See example below.')
+                    print('file_manipulator.py replace-string input_filepath find_word replace_word')
+
+                else:
+                    find_word = sys.argv[3]
+                    replace_word = sys.argv[4]
+                    replace_string(input_data, find_word, replace_word, input_filepath)
 
             else:
                 print('Invalid command. Acceptable commands are following 4:')
@@ -74,9 +86,16 @@ def duplicate_contents(input_data, str_repeat_count, input_filepath):
         print(f'Duplicate-contents command has been completed. Output file here: {input_filepath}')
 
     except ValueError:
-        print('Invalid input, duplicate-contents command require an integer for the number of repeats as the thrid argument. See example below.')
+        print('Invalid input, duplicate-contents command require an integer for the number of repeats as the third argument. See example below.')
         print('file_manipulator.py duplicate-contents input_filepath 2')
 
+
+# python3 file_manipulator.py replace-string test.txt Appending Replaced
+def replace_string(input_data, target_str, replace_str, input_filepath):
+    replaced_data = input_data.replace(target_str, replace_str)
+
+    with open(input_filepath, 'w') as f:
+        f.write(replaced_data)
 
 
 if __name__ == '__main__':
