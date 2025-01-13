@@ -26,7 +26,7 @@ def main():
                 reverse(input_data, output_filepath)
 
             elif command == 'copy':
-                print('copy command was selected')
+                copy(input_data, output_filepath)
 
             elif command == 'duplicate-contents':
                 print('duplicate-contents command was selected')
@@ -49,6 +49,14 @@ def reverse(input_data, output_filepath):
     with open(output_filepath, 'w') as out_f:
         out_f.write(rev)
         print('Reversed command has been completed.')
+
+
+# python3 file_manipulator.py copy test.txt output.txt
+def copy(input_data, output_filepath):
+
+    with open(output_filepath, 'w') as out_f:
+        out_f.write(input_data)
+        print(f'Copy command has been completed. Output file here: {output_filepath}')
 
 
 if __name__ == '__main__':
