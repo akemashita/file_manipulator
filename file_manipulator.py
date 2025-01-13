@@ -29,7 +29,8 @@ def main():
                 copy(input_data, output_filepath)
 
             elif command == 'duplicate-contents':
-                print('duplicate-contents command was selected')
+                # print('duplicate-contents command was selected')
+                duplicate_contents(input_data, output_filepath, input_filepath)
 
             elif command == 'replace-string':
                 print('replace-string command was selected')
@@ -57,6 +58,25 @@ def copy(input_data, output_filepath):
     with open(output_filepath, 'w') as out_f:
         out_f.write(input_data)
         print(f'Copy command has been completed. Output file here: {output_filepath}')
+
+
+# python3 file_manipulator.py duplicate-contents test.txt 3
+def duplicate_contents(input_data, str_repeat_count, input_filepath):
+    # 繰り返し回数が数字以外の場合はエラーを返す
+    try :
+        int_repeat_count = int(str_repeat_count)
+
+        duplicated_contents = input_data * int_repeat_count
+
+        with open(input_filepath, 'w') as input_f:
+            input_f.write(duplicated_contents)
+
+        print(f'Duplicate-contents command has been completed. Output file here: {input_filepath}')
+
+    except ValueError:
+        print('Invalid input, duplicate-contents command require an integer for the number of repeats as the thrid argument. See example below.')
+        print('file_manipulator.py duplicate-contents input_filepath 2')
+
 
 
 if __name__ == '__main__':
